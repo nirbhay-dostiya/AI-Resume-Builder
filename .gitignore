@@ -32,3 +32,6 @@ resume-builder-ui/.eslintcache
 *.njsproj
 *.sln
 *.swp
+
+# Generated Run Outputs
+output/
