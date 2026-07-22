@@ -1,0 +1,38 @@
+JOHN DOE
+Email: john.doe@email.com | Phone: +1-555-0199 | Location: New York, NY
+LinkedIn: linkedin.com/in/johndoe | GitHub: github.com/johndoe
+
+EDUCATION
+State University, New York, NY
+Bachelor of Science in Computer Science | GPA: 3.8 / 4.0
+Graduation: May 2026
+
+TECHNICAL SKILLS
+- Programming Languages: Python, JavaScript, SQL, HTML5, CSS3
+- Frameworks & Libraries: React.js, FastAPI, Node.js, Express, Bootstrap
+- Databases: PostgreSQL, MongoDB, SQLite
+- Developer Tools: Git, GitHub, Docker, VS Code, Postman
+- Cloud Services: AWS (S3, EC2), Vercel
+
+WORK EXPERIENCE
+TechCorp, New York, NY
+Software Engineering Intern | June 2025 - August 2025
+- Designed and built responsive RESTful API endpoints using Python FastAPI, reducing response times by 15% through optimized query execution and caching strategies.
+- Developed interactive web interfaces using React.js, enhancing the user dashboard and improving mobile responsiveness.
+- Collaborated with 5 senior engineers in an Agile environment, participating in daily standups, code reviews, and sprint planning.
+- Created unit tests with pytest, increasing test coverage from 75% to 90% and identifying 12 critical bugs prior to production release.
+
+PROJECTS
+DevFlow (Full-Stack Developer Forum) | React.js, Node.js, MongoDB
+- Built a developer question-and-answer platform using React for frontend and Node.js/Express for API services.
+- Implemented user authentication using JWT and secure password hashing with bcrypt.
+- Designed schema models in MongoDB and integrated rich-text editing capability for posting queries.
+
+SmartML (AutoML Python Utility) | Python, Scikit-Learn, Pandas
+- Developed a CLI tool in Python that automates data preprocessing, model selection, and training pipeline execution.
+- Implemented hyperparameter tuning utilizing grid search, improving average model accuracy by 8%.
+- Integrated logging and performance reporting, exporting training details to CSV and JSON formats.
+
+CERTIFICATIONS
+- AWS Certified Cloud Practitioner (Verification Code: AWS-12345)
+- Meta Front-End Developer Professional Certificate (Coursera)

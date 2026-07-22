@@ -1,0 +1,34 @@
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Portable Git
+.git-portable/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large files and zip archives
+*.zip
+*.tar.gz
+*.rar
+
+# Environment variables
+.env
+
+# Node.js dependencies
+resume-builder-ui/node_modules/
+resume-builder-ui/dist/
+resume-builder-ui/.eslintcache
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

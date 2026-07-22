@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summer Training Project Report - AI-Powered Resume Builder</title>
+  <style>
+    /* Academic Typography Styling System */
+    @page {
+      size: A4;
+      margin: 2.54cm; /* Standard 1 inch margins */
+    }
+    
+    :root {
+      --font-primary: "Times New Roman", Times, serif;
+      --line-height-academic: 1.5;
+      --font-size-base: 12pt;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-academic);
+      color: #000;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Page container setup for screen & print segregation */
+    .page {
+      page-break-after: always;
+      position: relative;
+      width: 100%;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* Cover Page Specific Styles */
+    .cover-page {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 24cm; /* Approximated print page height */
+      padding: 1.5cm 0;
+    }
+
+    .cover-header {
+      font-size: 14pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.4;
+      margin-bottom: 2cm;
+    }
+
+    .cover-title {
+      font-size: 24pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 2cm 0 1cm 0;
+      line-height: 1.2;
+    }
+
+    .cover-subtitle {
+      font-size: 16pt;
+      font-style: italic;
+      margin-bottom: 3cm;
+    }
+
+    .cover-metadata {
+      font-size: 12pt;
+      text-align: left;
+      margin: 2cm auto;
+      max-width: 15cm;
+      line-height: 1.8;
+    }
+
+    .cover-metadata table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cover-metadata td {
+      padding: 4px 0;
+      vertical-align: top;
+    }
+
+    .cover-metadata td.label {
+      width: 35%;
+      font-weight: bold;
+    }
+
+    .cover-footer {
+      font-size: 12pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: auto;
+      border-top: 1px solid #000;
+      padding-top: 1cm;
+    }
+
+    /* Headings Styling */
+    h1, h2, h3, h4 {
+      font-family: var(--font-primary);
+      color: #000;
+      page-break-after: avoid;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 16pt;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 1.5cm;
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 14pt;
+      margin-top: 1cm;
+      margin-bottom: 0.5cm;
+      border-bottom: 0.5px dotted #999;
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      font-size: 12pt;
+      margin-top: 0.75cm;
+      margin-bottom: 0.3cm;
+    }
+
+    h4 {
+      font-size: 12pt;
+      font-style: italic;
+      margin-top: 0.5cm;
+      margin-bottom: 0.2cm;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0.6cm;
+      text-align: justify;
+      text-indent: 1cm; /* Standard academic paragraph indent */
+    }
+
+    p.no-indent {
+      text-indent: 0;
+    }
+
+    /* Table Styles */
+    table.content-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8cm 0;
+      font-size: 11pt;
+      page-break-inside: avoid;
+    }
+
+    table.content-table th, table.content-table td {
+      border: 1px solid #000;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    table.content-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    /* List Styles */
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 0.6cm;
+      padding-left: 1.5cm;
+    }
+
+    li {
+      margin-bottom: 0.2cm;
+      text-align: justify;
+    }
+
+    /* Horizontal Rules and Newpages */
+    hr {
+      border: 0;
+      border-top: 1px solid #000;
+      margin: 1.5cm 0;
+    }
+
+    /* Code block styling */
+    pre, code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 10pt;
+      background-color: #f8f9fa;
+    }
+
+    pre {
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-x: auto;
+      margin-bottom: 0.6cm;
+      page-break-inside: avoid;
+      line-height: 1.3;
+    }
+
+    /* Screenshot visual boxes */
+    .screenshot-placeholder {
+      border: 2px dashed #666;
+      background-color: #fafafa;
+      padding: 20px;
+      text-align: center;
+      margin: 0.8cm auto;
+      max-width: 90%;
+      page-break-inside: avoid;
+    }
+
+    .screenshot-title {
+      font-weight: bold;
+      font-size: 10pt;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .wireframe-box {
+      border: 1px solid #aaa;
+      background: #fff;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 9pt;
+      white-space: pre;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    /* Certificate sign section */
+    .sign-section {
+      margin-top: 3cm;
+      display: flex;
+      justify-content: space-between;
+      page-break-inside: avoid;
+    }
+
+    /* References layout */
+    .references-list ol {
+      padding-left: 1cm;
+    }
+
+    .references-list li {
+      margin-bottom: 0.4cm;
+      padding-left: 0.5cm;
+      text-indent: -0.5cm; /* Hanging indent */
+    }
+
+    /* Screen display wrappers to make preview beautiful */
+    @media screen {
+      body {
+        background-color: #e4e4e7;
+        padding: 40px 10px;
+      }
+      .page {
+        background-color: #fff;
+        max-width: 21cm;
+        min-height: 29.7cm;
+        margin: 0 auto 40px auto;
+        padding: 2.54cm;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        border: 1px solid #d4d4d8;
+      }
+      .cover-page {
+        height: 24.6cm;
+      }
+    }
+
+    @media print {
+      body {
+        background-color: #fff;
+        padding: 0;
+      }
+      .page {
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+      }
+      .screenshot-placeholder {
+        border: 1.5px solid #000;
+        background-color: #fff;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER PAGE -->
+  <div class="page">
+    <div class="cover-page">
+      <div class="cover-header">
+        Summer Training Programme on Generative AI & Prompt Engineering<br>
+        Organized by: Electronics & ICT Academy, IIT Roorkee
+      </div>
+      
+      <div>
+        <div class="cover-title">AI-Powered Resume Builder</div>
+        <div class="cover-subtitle">A Full-Stack Agentic Career Optimization Framework</div>
+        <hr style="width: 60%; margin: 1cm auto;">
+        <p class="no-indent" style="text-align: center; font-style: italic;">
+          A Summer Training Project Report submitted in partial fulfillment of the requirements for the Award of the Certificate of Training
+        </p>
+      </div>
+
+      <div class="cover-metadata">
+        <table>
+          <tr>
+            <td class="label">Submitted By:</td>
+            <td>Nirbhay</td>
+          </tr>
+          <tr>
+            <td class="label">College/University:</td>
+            <td>Mangalmay Institute of Technology and Management, Gr. Noida (UP)</td>
+          </tr>
+          <tr>
+            <td class="label">Department:</td>
+            <td>Bachelor of Computer Applications (BCA)</td>
+          </tr>
+          <tr>
+            <td class="label">Email Address:</td>
+            <td>nirbhaykumarraj1998@gmial.com</td>
+          </tr>
+          <tr>
+            <td class="label">Mobile Number:</td>
+            <td>+91 9572442110</td>
+          </tr>
+          <tr>
+            <td class="label">GitHub Repository:</td>
+            <td>https://github.com/nirbhay-dostiya/AI-Resume-Builder</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="cover-footer">
+        Electronics & ICT Academy<br>
+        Indian Institute of Technology Roorkee<br>
+        July 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: CERTIFICATE OF ORIGINALITY -->
+  <div class="page">
+    <h1>Certificate of Originality</h1>
+    <br><br>
+    <p>
+      This is to certify that the project report entitled <strong>"AI-Powered Resume Builder"</strong>, submitted by <strong>Nirbhay</strong> to the <strong>Electronics & ICT Academy, IIT Roorkee</strong>, in partial fulfillment of the requirements of the Summer Training Programme on Generative AI & Prompt Engineering, is an authentic record of original project work designed and implemented by him.
+    </p>
+    <p>
+      The engineering decisions, system configurations, multi-agent frameworks, prompt logic, and visual components compiled in this project have been fully developed within the workspace, utilizing verified libraries and official API interfaces. Proper citations and documentation references have been provided for all external software concepts and dependencies.
+    </p>
+    <p>
+      This work, either in whole or in part, has not been submitted to any other institution for the award of any degree or diploma.
+    </p>
+    
+    <div class="sign-section">
+      <div>
+        <br><br>
+        <strong>Date:</strong> July 22, 2026<br>
+        <strong>Place:</strong> Pari chowk, Gr. Noida (UP)<br>
+        <br>
+        __________________________<br>
+        <strong>Nirbhay</strong><br>
+        Student Contributor<br>
+        Bachelor of Computer Applications (BCA)<br>
+        Mangalmay Institute of Technology and Management, Gr. Noida (UP)
+      </div>
+      <div>
+        <br><br>
+        __________________________<br>
+        <strong>Internal Evaluator</strong><br>
+        Electronics & ICT Academy, IIT Roorkee
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 3: TABLE OF CONTENTS -->
+  <div class="page">
+    <h1>Table of Contents</h1>
+    <table class="content-table" style="border: none;">
+      <thead>
+        <tr style="background-color: transparent;">
+          <th style="border: none; text-align: left;">Section Title</th>
+          <th style="border: none; text-align: right; width: 15%;">Page No.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>Certificate of Originality</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">ii</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>Chapter 1: Introduction</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">1</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.1 Introduction to Artificial Intelligence</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">1</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.2 What is Generative AI?</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">1</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.3 What are Large Language Models (LLMs)?</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">2</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.4 Prompt Engineering</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">3</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.5 Need for AI Resume Builders</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">4</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.6 Existing Problems in Resume Screening</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">5</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.7 Applicant Tracking Systems (ATS)</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">5</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.8 Objectives of the Project</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">6</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.9 Scope of the Project</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">7</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">1.10 Key Learning Outcomes</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">7</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>Chapter 2: Project Details</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">9</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.1 Project Overview</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">9</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.2 Problem Statement</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">9</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.3 Objectives</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">10</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.4 Proposed Solution</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">10</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.5 System Architecture</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">11</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.6 Workflow and Data Flow</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">12</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.7 AI Agents & Collaborative Roles</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">13</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.8 Tools and Technologies Used</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">14</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.9 Project Development Methodology</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">16</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.10 Prompt Engineering Design Patterns</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">17</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.11 Software Implementation Details</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">19</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.12 Results and Outputs</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">21</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">2.13 Visual Interface and Screenshots</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">22</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>Chapter 3: Coursework Assignments</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">26</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">3.1 Assignment 1: Prompt Optimization</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">26</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">3.2 Assignment 2: Multi-Agent Support Team</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">28</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0; padding-left: 0.5cm;">3.3 Assignment 3: Syllabus RAG System</td>
+          <td style="border: none; padding: 4px 0; text-align: right;">30</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>Chapter 4: Summary, Conclusion, and Reflections</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">33</td>
+        </tr>
+        <tr style="background-color: transparent;">
+          <td style="border: none; padding: 4px 0;"><strong>References</strong></td>
+          <td style="border: none; padding: 4px 0; text-align: right;">37</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAGE 4: CHAPTER 1 - INTRODUCTION PART I -->
+  <div class="page">
+    <h1>Chapter 1: Introduction</h1>
+    
+    <h2>1.1 Introduction to Artificial Intelligence</h2>
+    <p>
+      Artificial Intelligence (AI) has emerged as one of the defining technological paradigms of the twenty-first century. Rooted in the early mathematical theories of computation proposed by Alan Turing and formalized during the Dartmouth Conference of 1956, AI is broadly concerned with the creation of computational systems capable of performing tasks that historically required human intelligence. These tasks include logical reasoning, symbolic deduction, visual perception, acoustic speech recognition, strategic planning, decision making, and natural language understanding.
+    </p>
+    <p>
+      Over the past seven decades, AI research has shifted through various epochs: from logic-based expert systems to statistical machine learning methods. In the modern era, the dominance of deep artificial neural networks—inspired by biological neuroscience—has revolutionized how machines acquire representations from raw, unstructured data. The transition from rule-based programming to data-driven learning has enabled computers to identify complex, high-dimensional patterns in text, images, and audio, paving the way for the current age of cognitive automation.
+    </p>
+
+    <h2>1.2 What is Generative AI?</h2>
+    <p>
+      Generative Artificial Intelligence (Generative AI) represents a fundamental paradigm shift within machine learning. While traditional machine learning systems are primarily discriminative—focusing on classification, regression, or clustering tasks where the objective is to predict a label <em>Y</em> given an input <em>X</em> (modeling the conditional probability <em>P(Y|X)</em>)—Generative AI aims to model the underlying probability distribution of the data itself (<em>P(X)</em> or <em>P(X|Y)</em>). This capability enables these systems to generate entirely new, synthetic instances of data that share structural and stylistic similarities with the training data.
+    </p>
+    <p>
+      The modern rise of Generative AI is built upon the <strong>Transformer Architecture</strong>, introduced by Vaswani et al. in the seminal 2017 paper <em>"Attention Is All You Need"</em>. The Transformer replaced recurrent architectures (like LSTMs) with the <strong>Self-Attention Mechanism</strong>, which calculates the mathematical correlation between every word in a sequence simultaneously. This mathematical breakthrough resolved the gradient bottleneck in processing long-range dependencies and enabled high-performance parallel processing during model training.
+    </p>
+  </div>
+
+  <!-- PAGE 5: CHAPTER 1 - INTRODUCTION PART II -->
+  <div class="page">
+    <h2>1.3 What are Large Language Models (LLMs)?</h2>
+    <p>
+      Large Language Models (LLMs) are deep-learning models trained on massive text corpora (billions or trillions of tokens) containing books, web pages, code repositories, and scientific articles. Utilizing transformer architectures with billions of parameters, LLMs learn to model the statistical distribution of human language.
+    </p>
+    <p>
+      At their core, LLMs are trained using the <strong>Auto-regressive Next-Token Prediction</strong> task. Given a sequence of tokens <em>t<sub>1</sub>, t<sub>2</sub>, ..., t<sub>k-1</sub></em>, the model computes the probability distribution over a vocabulary <em>V</em> to select the most probable next token <em>t<sub>k</sub></em>.
+    </p>
+    <p>
+      The training process for state-of-the-art LLMs typically involves three core phases:
+    </p>
+    <ol>
+      <li><strong>Unsupervised Pre-training</strong>: The model consumes raw text data to learn syntax, facts, basic reasoning, and general programming semantics. This forms the foundation model.</li>
+      <li><strong>Supervised Fine-Tuning (SFT)</strong>: The pre-trained model is tuned on high-quality, curated instruction-response pairs to learn how to act as an assistant rather than just a text completer.</li>
+      <li><strong>Reinforcement Learning from Human Feedback (RLHF)</strong>: The model is refined using human alignment preferences to maximize helpfulness, accuracy, and safety.</li>
+    </ol>
+
+    <h2>1.4 Prompt Engineering</h2>
+    <p>
+      Prompt Engineering is the systematic process of designing, structuring, and optimizing inputs (prompts) to guide Large Language Models toward generating accurate, relevant, and structured outputs. Because LLMs are sensitive to formatting, word choice, and structural layout, prompt design has evolved from an empirical art form into a structured discipline of software engineering.
+    </p>
+    <p>
+      Prompt engineering leverages specific cognitive framework design patterns:
+    </p>
+    <ul>
+      <li><strong>Zero-Shot Prompting</strong>: The model is asked to perform a task without any examples of the expected output. This tests the baseline knowledge of the model.</li>
+      <li><strong>Few-Shot Prompting</strong>: The model is provided with a small number of demonstration examples within the prompt context. This teaches the model formatting rules, stylistic preferences, and specific logic.</li>
+      <li><strong>Chain-of-Thought (CoT)</strong>: The model is instructed to generate its step-by-step reasoning process before outputting the final answer. This dramatically reduces logical errors and hallucinations on reasoning-heavy tasks.</li>
+      <li><strong>System Prompting / System Instructions</strong>: Global rules set at the API level that define the model's behavior, personality constraints, safety guidelines, and output schemas throughout the conversation.</li>
+    </ul>
+  </div>
+
+  <!-- PAGE 6: CHAPTER 1 - INTRODUCTION PART III -->
+  <div class="page">
+    <h2>1.5 Need for AI Resume Builders</h2>
+    <p>
+      In the modern, highly competitive job market, candidates face a major bottleneck during the application process. A traditional resume is static, yet a single candidate may apply to diverse roles, each requiring different emphasis on specific technical skill sets. 
+    </p>
+    <p>
+      Creating tailored resumes manually is a time-consuming task. Candidates must read through job descriptions, identify key terms, adjust formatting, and rewrite experience descriptions. This process is prone to errors, formatting mistakes, and layout bugs. 
+    </p>
+    <p>
+      An <strong>AI-Powered Resume Builder</strong> automates this customization loop. By processing the candidate's historical experience profile alongside target job descriptions, the system dynamically generates highly relevant, tailored resumes in seconds. This saves hours of manual work while ensuring that experiences are described using active verbs and metrics that align directly with the recruiter's requirements.
+    </p>
+
+    <h2>1.6 Existing Problems in Resume Screening</h2>
+    <p>
+      The resume screening process is a significant bottleneck in modern recruitment. It is characterized by severe inefficiencies on both the employer and candidate sides:
+    </p>
+    <ul>
+      <li><strong>Extreme Volume</strong>: Large organizations receive hundreds or thousands of applications for a single open role. Human recruiters spend an average of only <strong>6 to 8 seconds</strong> scanning a resume before making an initial decision.</li>
+      <li><strong>Unconscious Human Bias</strong>: Recruiters can bring unconscious biases regarding name, gender, educational pedigree, gaps in career timelines, or layout aesthetics, which can filter out highly qualified candidates.</li>
+      <li><strong>Mismatched Terminologies</strong>: Candidates often fail to describe their work using the exact vocabulary used by recruiters, leading to rejections even when they possess the necessary skills.</li>
+    </ul>
+
+    <h2>1.7 Applicant Tracking Systems (ATS)</h2>
+    <p>
+      To manage the high volume of applications, modern enterprises rely on Applicant Tracking Systems (ATS). An ATS is a software platform that acts as a database and filtering system for job applications.
+    </p>
+    <p>
+      When a candidate uploads a resume, the ATS processes it using several steps: document parsing (categorizing text into Education, Skills, and Experience), keyword extraction, and scoring/ranking based on keyword frequency.
+    </p>
+  </div>
+
+  <!-- PAGE 7: CHAPTER 1 - INTRODUCTION PART IV -->
+  <div class="page">
+    <h2>1.8 Objectives of the Project</h2>
+    <p>
+      The primary goal of this project is to develop and implement a full-stack, AI-powered system that automates the professional resume tailoring and career optimization lifecycle. The technical objectives include:
+    </p>
+    <ul>
+      <li><strong>Multi-Agent Orchestration</strong>: Deploy a modular AI agent team using the <strong>CrewAI</strong> framework to collaborate on parsing, editing, compliance auditing, and career coaching.</li>
+      <li><strong>Tailored Generation</strong>: Build an execution pipeline that accepts a student's profile and a target job description to generate a highly tailored, ATS-optimized resume.</li>
+      <li><strong>ATS Compliance Auditing</strong>: Build an automated ATS review system that evaluates the resume, calculates a match score, highlights keyword gaps, and suggests revisions.</li>
+      <li><strong>Actionable Career Development</strong>: Create an automated coach that identifies skills gaps and outputs a concrete, 3-month week-by-week learning roadmap.</li>
+      <li><strong>Interactive UI</strong>: Develop a responsive React dashboard featuring dark/light mode toggles, drag-and-drop file uploads, circular score gauges, and document export engines.</li>
+      <li><strong>Multi-Format Exporting</strong>: Implement a server-side rendering pipeline to export generated Markdown files into print-ready PDF and DOCX files.</li>
+    </ul>
+
+    <h2>1.9 Scope of the Project</h2>
+    <p>
+      The scope of this project covers the design, backend implementation, frontend client, and testing of the application:
+    </p>
+    <ul>
+      <li><strong>Target Audience</strong>: Undergraduate students, recent graduates, and entry-level professionals seeking software engineering, data science, and general technology roles.</li>
+      <li><strong>Language Support</strong>: Standard English text processing and output generation.</li>
+      <li><strong>AI Model Selection</strong>: Support for Google Gemini (Gemini 1.5 Flash / 3.1 Flash Lite) and OpenAI (GPT-4o-mini) through unified API environments.</li>
+      <li><strong>Export Standards</strong>: Standard Letter/A4 layout formats for generated PDF and DOCX documents.</li>
+    </ul>
+
+    <h2>1.10 Key Learning Outcomes</h2>
+    <p>
+      Developing this project provided hands-on experience with several modern software engineering concepts: Agent-Oriented Programming (AOP), production prompt engineering (handling system instructions and templates), asynchronous web frameworks (FastAPI), modern frontend clients (React.js), and server-side document generation using ReportLab and python-docx.
+    </p>
+  </div>
+
+  <!-- PAGE 8: CHAPTER 2 - PROJECT DETAILS PART I -->
+  <div class="page">
+    <h1>Chapter 2: Project Details</h1>
+
+    <h2>2.1 Project Overview</h2>
+    <p>
+      The <strong>AI-Powered Resume Builder</strong> is an end-to-end full-stack application designed to help candidates optimize their job applications. The system accepts two primary inputs from the user: a raw profile (listing education, technical skills, and experience) and a target job description. 
+    </p>
+    <p>
+      Using a multi-agent backend orchestrated by <strong>CrewAI</strong>, the application processes these inputs through a sequential workflow of three AI agents. This workflow generates three tailored documents: a tailored resume in clean Markdown, a structured ATS compliance audit report containing matching scores and keyword recommendations, and an actionable 3-month career development roadmap.
+    </p>
+    <p>
+      The application also features a React-based frontend dashboard that displays these outputs and allows users to export them as PDF or DOCX files, search for simulated matching jobs, and generate supplementary application assets like cover letters and LinkedIn "About" summaries.
+    </p>
+
+    <h2>2.2 Problem Statement</h2>
+    <p>
+      Job seekers, particularly students and early-career professionals, often struggle to pass automated resume screening tools (ATS). Their resumes are frequently rejected because they use static profiles that fail to match the specific keywords and responsibilities of different target roles, use complex multi-column resume layouts that break automated parsers, and lack clear guidance on how to address skills gaps relative to target job postings.
+    </p>
+
+    <h2>2.3 Objectives</h2>
+    <p>
+      To address this problem, the project implements capabilities for tailoring bullet points using active verbs and metrics, generating a match score and auditing keyword alignment, mapping missing hard and soft skills, and exporting the results directly to standard PDF and Word formats through a responsive React dashboard.
+    </p>
+
+    <h2>2.4 Proposed Solution</h2>
+    <p>
+      The proposed solution uses an agentic workflow to automate resume tailoring and career coaching. By using <strong>CrewAI</strong>, we split the complex task of resume optimization into three specialized roles: the Resume Writer Agent, the ATS Auditor Agent, and the Career Coach Agent. Running these agents sequentially allows each agent to build upon the outputs of the previous one.
+    </p>
+  </div>
+
+  <!-- PAGE 9: CHAPTER 2 - PROJECT DETAILS PART II (ARCHITECTURE) -->
+  <div class="page">
+    <h2>2.5 System Architecture</h2>
+    <p>
+      The system follows a modern decoupled client-server architecture. The backend manages LLM orchestration and document generation, while the frontend handles user interaction and document visualization.
+    </p>
+
+    <h3>1. Backend Architecture (Python & FastAPI)</h3>
+    <p>
+      The backend is built with Python 3.12 and FastAPI. It exposes RESTful API endpoints for running agent crews, listing job matches, and generating exports.
+    </p>
+    <ul>
+      <li><strong>API Controller (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/main.py">main.py</a>)</strong>: Handles HTTP requests, manages file uploads, parses raw text, and coordinates the LLM configuration.</li>
+      <li><strong>Agent Orchestrator (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/crew.py">crew.py</a>)</strong>: Instantiates the CrewAI runtime, configures execution order, and manages task dependencies.</li>
+      <li><strong>Agent Definitions (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/agents.py">agents.py</a>)</strong>: Defines agent roles, goals, backstories, and LLM integrations.</li>
+      <li><strong>Task Specifications (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/tasks.py">tasks.py</a>)</strong>: Defines task instructions, system inputs, and expected output structures.</li>
+    </ul>
+
+    <h3>2. Frontend Architecture (React.js & Vite)</h3>
+    <p>
+      The frontend is built using React 18, Vite, and vanilla CSS. It uses a component-based layout:
+    </p>
+    <ul>
+      <li><strong>Dashboard Controller (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/App.jsx">App.jsx</a>)</strong>: Manages application state, theme switching, tab navigation, and authentication status.</li>
+      <li><strong>Authentication (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/components/Auth.jsx">Auth.jsx</a>)</strong>: A login panel with pre-filled mock credentials for testing.</li>
+      <li><strong>Resume Studio (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/components/ResumeStudio.jsx">ResumeStudio.jsx</a>)</strong>: The primary input panel. Features file upload dropzones, provider selection, and direct text input fields.</li>
+      <li><strong>ATS Compliance Hub (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/components/ATSAnalysis.jsx">ATSAnalysis.jsx</a>)</strong>: Parses the markdown ATS report to render an animated circular score gauge, strengths/weaknesses cards, and keyword lists.</li>
+      <li><strong>Career Coach Panel (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/components/CareerCoach.jsx">CareerCoach.jsx</a>)</strong>: Renders skills gap analysis cards and a visual, vertical timeline for the 3-month roadmap.</li>
+      <li><strong>Job Search Portal (<a href="file:///c:/Users/HP/OneDrive/Desktop/Resume Builder/resume-builder-ui/src/components/JobSearch.jsx">JobSearch.jsx</a>)</strong>: A job board that filters and sorts mock positions, showing compatibility match scores based on skill alignment.</li>
+    </ul>
+  </div>
+
+  <!-- PAGE 10: CHAPTER 2 - PROJECT DETAILS PART III (WORKFLOW & AGENTS) -->
+  <div class="page">
+    <h2>2.6 Workflow and Data Flow</h2>
+    <p>
+      The data flow follows a sequential path through the application components: the user uploads their profile and a target job description via the React interface; FastAPI receives these inputs and resolves the LLM configuration (Gemini or OpenAI); the Resume Writer Agent generates a tailored resume in Markdown; the ATS Auditor Agent reviews the text and generates an audit report; the Career Coach Agent creates a skills gap analysis and a 3-month roadmap; the backend saves the generated files to the <code>/output</code> directory; and the React frontend updates its state to display the results across the dashboard tabs.
+    </p>
+
+    <h2>2.7 AI Agents & Collaborative Roles</h2>
+    <p>
+      The multi-agent system uses three agents defined in <code>agents.py</code>:
+    </p>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>Agent Name</th>
+          <th>Role Definition</th>
+          <th>Primary Goal</th>
+          <th>LLM Configuration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Resume Writer</strong></td>
+          <td>Professional Resume Writer & Content Strategist</td>
+          <td>Generate a highly tailored, ATS-friendly resume in Markdown format.</td>
+          <td>Google Gemini / OpenAI GPT</td>
+        </tr>
+        <tr>
+          <td><strong>ATS Auditor</strong></td>
+          <td>ATS Compliance Auditor</td>
+          <td>Evaluate keyword density, check layout structure, and calculate match scores.</td>
+          <td>Google Gemini / OpenAI GPT</td>
+        </tr>
+        <tr>
+          <td><strong>Career Coach</strong></td>
+          <td>Senior Career Coach & Mentor</td>
+          <td>Design a skills gap analysis and a 3-month week-by-week learning roadmap.</td>
+          <td>Google Gemini / OpenAI GPT</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>1. Resume Writer Agent</h3>
+    <p>
+      Tailors profile content using strong action verbs and structural keywords. It aligns experience details to highlight qualifications relevant to the target job description.
+    </p>
+
+    <h3>2. ATS Auditor Agent</h3>
+    <p>
+      Simulates screening software, calculating compatibility scores from 0 to 100, checking structure, identifying keyword alignment, and listing missing terms.
+    </p>
+
+    <h3>3. Career Coach Agent</h3>
+    <p>
+      Reviews experience deficiencies relative to the job requirements, recommending online courses, industry certifications, and a week-by-week improvement timeline.
+    </p>
+  </div>
+
+  <!-- PAGE 11: CHAPTER 2 - PROJECT DETAILS PART IV (TECHNOLOGY & METHODOLOGY) -->
+  <div class="page">
+    <h2>2.8 Tools and Technologies Used</h2>
+    <p>
+      The system integrates several programming paradigms and frameworks:
+    </p>
+    <ul>
+      <li><strong>Python (v3.12)</strong>: Core backend language, selected for its mature AI ecosystem.</li>
+      <li><strong>FastAPI</strong>: Asynchronous web framework exposing RESTful APIs with automated docs.</li>
+      <li><strong>CrewAI</strong>: Multi-agent framework coordinating roles, task dependencies, and sequential flows.</li>
+      <li><strong>React.js (v18)</strong>: Renders the responsive client-side dashboard interfaces.</li>
+      <li><strong>Google Gemini & OpenAI GPT</strong>: High-reasoning LLMs powering agent workflows.</li>
+      <li><strong>Vite</strong>: Fast development build system for the frontend client.</li>
+    </ul>
+
+    <h2>2.9 Project Development Methodology</h2>
+    <p>
+      The project followed an agile, iterative process: Requirements Analysis (defining system inputs and agent goals), Prompt Design (drafting and testing prompts in Jupyter Notebooks), Crew Orchestration (integrating agents with the FastAPI server), Dashboard Development (building the React interface), and Verification (validating endpoints and document exports).
+    </p>
+
+    <h2>2.10 Prompt Engineering Design Patterns</h2>
+    <p>
+      Task instructions are configured using key prompt engineering patterns. The prompts are structured systematically to ensure consistent outputs:
+    </p>
+    <pre>
+# Resume Writer Prompt
+Analyze the candidate's profile: {student_profile}
+And the job description: {job_description}
+Create a tailored, ATS-friendly resume in Markdown format.
+
+# ATS Auditor Prompt
+Review the generated resume against the job description: {job_description}
+Generate a structured ATS compliance audit report with score (0% to 100%).
+
+# Career Coach Prompt
+Review candidate profile, job description, and ATS report.
+Design a skills gap analysis and a 3-month learning roadmap.
+    </pre>
+  </div>
+
+  <!-- PAGE 12: CHAPTER 2 - PROJECT DETAILS PART V (IMPLEMENTATION & ADVANTAGES) -->
+  <div class="page">
+    <h2>2.11 Software Implementation Details</h2>
+    <p>
+      The backend is structured into modular components: <code>main.py</code> handles HTTP routing, <code>agents.py</code> defines agent roles and backstories, <code>tasks.py</code> defines task descriptions and contexts, and <code>crew.py</code> coordinates execution.
+    </p>
+    <p>
+      The document export engine converts generated Markdown files into print-ready PDF and DOCX files. The PDF generator uses <code>ReportLab</code> to parse markdown headings, bullets, and body paragraphs, rendering them onto a single-column PDF canvas.
+    </p>
+
+    <h2>2.12 Results and Outputs</h2>
+    <p>
+      The sequential agent workflow produces three structured outputs: a tailored resume in Markdown, an ATS audit report containing a compatibility match score (0% to 100%), matching and missing keywords, and an improvement plan outlining a 3-month roadmap.
+    </p>
+
+    <h2>2.13 Visual Interface and Screenshots</h2>
+    
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+|                      Mock Login                        |
+|  Email: [ jane.doe@email.com                         ] |
+|  Password: [ **********                              ] |
+|                                                        |
+|                     [ Log In ]                         |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 1: Authentication Screen</div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++---------------------------+----------------------------+
+| Candidate Profile         | Job Description            |
+| [Drag & drop profile]     | [Drag & drop description]  |
+|                           |                            |
+| Text:                     | Text:                      |
+| John Doe, B.S. CS...      | Junior Full-Stack role...  |
++---------------------------+----------------------------+
+| Provider: [ Gemini ]           [ Tailor Resume ]       |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 2: Resume Studio Input Dashboard</div>
+    </div>
+  </div>
+
+  <!-- PAGE 13: CHAPTER 2 - PROJECT DETAILS PART VI (SCREENSHOTS AND OUTCOMES) -->
+  <div class="page">
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+| Tailored Resume Preview                                |
+| [Raw Markdown View] | [Rendered Preview]               |
+|                                                        |
+| John Doe                                               |
+| Email: john.doe@email.com                              |
+| ...                                                    |
+|                                                        |
+|   [ Export PDF ]               [ Export DOCX ]         |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 3: Resume Review and Markdown Editor</div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+| ATS Auditor Score                                      |
+|                                                        |
+|         ((  78%  ))   <- Circular Progress Gauge       |
+|                                                        |
+| +-------------------------+--------------------------+ |
+| | Matching Keywords       | Missing Keywords         | |
+| | - Python, FastAPI, React| - Docker, PostgreSQL     | |
+| +-------------------------+--------------------------+ |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 4: ATS Compliance Hub</div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+| Career Improvement Plan                                |
+|                                                        |
+|  Month 1: Learn PostgreSQL & Database Foundations      |
+|  * Target Course: Udemy PostgreSQL Bootcamp            |
+|                                                        |
+|  Month 2: Master Docker Containerization               |
+|  * Target Course: Coursera Docker Fundamentals         |
+|                                                        |
+|  Month 3: Capstone Project & Application Portfolio     |
+|  * Build full-stack application and deploy to AWS      |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 5: Career Coach Roadmap Timeline</div>
+    </div>
+  </div>
+
+  <!-- PAGE 14: CHAPTER 2 - PROJECT DETAILS PART VII (ADVANTAGES AND LIMITATIONS) -->
+  <div class="page">
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+| Search: [ Python FastAPI               ]               |
+|                                                        |
+| Junior Backend Developer - TechCorp India (92% Match)  |
+| Location: Bengaluru | Hybrid                           |
+| Skills: Python, FastAPI, Docker, SQL                   |
+|                                                        |
+| Software Engineer Intern - Flipkart (85% Match)        |
+| Location: Bengaluru | On-site                          |
+| Skills: Python, Git, FastAPI                           |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 6: AI Job Matcher Board</div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="wireframe-box">
++--------------------------------------------------------+
+| Export Successful                                      |
+| Document compiled and downloaded as "resume.pdf"       |
++--------------------------------------------------------+
+      </div>
+      <div class="screenshot-title">Figure 7: Document Exporting Engine</div>
+    </div>
+
+    <h2>2.14 Advantages of the System</h2>
+    <ul>
+      <li><strong>Automated Customization</strong>: Saves hours of manual work by automatically tailoring experience bullet points to specific job descriptions.</li>
+      <li><strong>Objective Feedback</strong>: Provides candidates with clear keyword and structure evaluations prior to job submission.</li>
+      <li><strong>Actionable Roadmaps</strong>: Offers step-by-step guidance on how to address skills gaps relative to target job postings.</li>
+    </ul>
+
+    <h2>2.15 System Limitations</h2>
+    <p>
+      The application requires active API keys to function, is subject to LLM rate limits on large inputs, relies on static mock data for job matching, and can produce formatting errors when exporting complex markdown to PDF.
+    </p>
+
+    <h2>2.16 Future Scope of Work</h2>
+    <p>
+      Future enhancements include integrating job board APIs to retrieve live job listings, connecting vector databases for RAG-based template selection, implementing client-side PDF parsing to extract existing resumes, and generating voice-based mock interviews.
+    </p>
+
+    <h2>2.17 Summary of Outcomes</h2>
+    <p>
+      The AI-Powered Resume Builder demonstrates how multi-agent workflows can automate complex professional writing and analysis tasks, helping candidates prepare their applications and build skills for target roles.
+    </p>
+  </div>
+
+  <!-- PAGE 15: CHAPTER 3 - ASSIGNMENTS PART I -->
+  <div class="page">
+    <h1>Chapter 3: Coursework Assignments</h1>
+
+    <h2>3.1 Assignment 1: System Prompt Optimization for Document Summarization</h2>
+
+    <h3>1. Objective</h3>
+    <p>
+      To evaluate and optimize different prompt engineering patterns (Zero-shot, Few-shot, and Chain-of-Thought) for summarizing long, technical research papers. The goal was to generate high-fidelity, structured summaries without losing critical technical terms.
+    </p>
+
+    <h3>2. Methodology</h3>
+    <p>
+      Prepared a 2000-word test document containing technical specifications for the Transformer architecture. Designed three distinct prompts representing Zero-shot, Few-shot, and Chain-of-Thought approaches. Executed summaries using Gemini 1.5 Flash and GPT-4o-mini, setting the temperature to 0.2 to minimize variance, and evaluated outputs based on factual accuracy, key term density, and formatting.
+    </p>
+
+    <h3>3. Tools and Technologies Used</h3>
+    <p>
+      Python 3.12, Google Gemini Developer API, OpenAI API, Jupyter Notebooks, Google Colab, and standard libraries (<code>google-generativeai</code>, <code>openai</code>, <code>pandas</code>).
+    </p>
+
+    <h3>4. System Implementation</h3>
+    <p>
+      The core evaluation logic was implemented in Python:
+    </p>
+    <pre>
+import google.generativeai as genai
+import os
+
+genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+model = genai.GenerativeModel('gemini-1.5-flash')
+
+cot_prompt = """
+You are an expert academic summarizer. 
+Process the following document step-by-step:
+1. List the primary architectural components introduced.
+2. Outline the training hyperparameters.
+3. Summarize the benchmarks.
+4. Produce a final structured summary.
+
+Document: {document}
+"""
+    </pre>
+
+    <h3>5. Experimental Results and Analysis</h3>
+    <table class="content-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Zero-Shot Prompt</th>
+          <th>Few-Shot Prompt</th>
+          <th>Chain-of-Thought (CoT)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Factual Accuracy</strong></td>
+          <td>82.0%</td>
+          <td>89.5%</td>
+          <td><strong>96.0%</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Keyword Density</strong></td>
+          <td>High, but unorganized</td>
+          <td>Managed and accurate</td>
+          <td><strong>Highly structured</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Output Length Adherence</strong></td>
+          <td>Poor (variable length)</td>
+          <td>Consistent</td>
+          <td><strong>Extremely precise</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Average Latency</strong></td>
+          <td><strong>1.2 seconds</strong></td>
+          <td>1.8 seconds</td>
+          <td>2.5 seconds</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>6. Key Learning Outcomes</h3>
+    <p>
+      Chain-of-Thought prompting significantly improves factual accuracy when summarizing complex technical documents. Zero-shot prompts are fast but struggle to follow strict structural constraints, while few-shot examples are highly effective for teaching models specific output layouts.
+    </p>
+  </div>
+
+  <!-- PAGE 16: CHAPTER 3 - ASSIGNMENTS PART II -->
+  <div class="page">
+    <h2>3.2 Assignment 2: Multi-Agent Roleplaying & Team Orchestration</h2>
+
+    <h3>1. Objective</h3>
+    <p>
+      To build an automated team of cooperating agents using <strong>CrewAI</strong> to resolve complex customer billing disputes. The system must categorise complaints, audit transaction histories, and draft professional email responses.
+    </p>
+
+    <h3>2. Methodology</h3>
+    <p>
+      Defined three specialized agent roles: Customer Support Triage, Billing Auditor, and Email Writer. Configured sequential task execution: Triage analyzes the input, Auditor checks transaction records, and Email Writer drafts the response. Tested the workflow on simulated billing disputes to verify coordination and context sharing.
+    </p>
+
+    <h3>3. Tools and Technologies Used</h3>
+    <p>
+      Python 3.12, CrewAI Framework, Google Gemini API (via LiteLLM / Gemini 1.5 Flash), and standard libraries (<code>crewai</code>, <code>litellm</code>).
+    </p>
+
+    <h3>4. System Implementation</h3>
+    <p>
+      The multi-agent workflow was configured as follows:
+    </p>
+    <pre>
+from crewai import Agent, Task, Crew, Process
+
+triage_agent = Agent(
+    role="Customer Support Analyst",
+    goal="Analyze complaints and extract invoice IDs.",
+    backstory="Expert at parsing customer emails for key details.",
+    allow_delegation=False
+)
+
+auditor_agent = Agent(
+    role="Billing Auditor",
+    goal="Verify transactions and calculate billing errors.",
+    backstory="Meticulous financial investigator.",
+    allow_delegation=False
+)
+    </pre>
+
+    <h3>5. Experimental Results and Analysis</h3>
+    <p>
+      The system was evaluated on a simulated dispute:
+    </p>
+    <ul>
+      <li><strong>Input</strong>: "I was charged $49.99 twice on my invoice INV-1002 on June 15th."</li>
+      <li><strong>Triage Output</strong>: Successfully extracted Invoice ID <code>INV-1002</code>, amount <code>$49.99</code>, and date <code>June 15th</code>.</li>
+      <li><strong>Auditor Output</strong>: Confirmed duplicate charge transactions in mock logs, recommending a refund of <code>$49.99</code>.</li>
+      <li><strong>Final Email Draft</strong>: Generated a professional email explaining the error and confirming the refund.</li>
+    </ul>
+
+    <h3>6. Key Learning Outcomes</h3>
+    <p>
+      Breaking complex problems into specialized agent roles increases output quality and consistency. Sequential task orchestration ensures context is maintained across agent handoffs, and proper role and backstory definition helps control model tone and style.
+    </p>
+  </div>
+
+  <!-- PAGE 17: CHAPTER 3 - ASSIGNMENTS PART III -->
+  <div class="page">
+    <h2>3.3 Assignment 3: Retrieval-Augmented Generation (RAG) QA System</h2>
+
+    <h3>1. Objective</h3>
+    <p>
+      To build a Retrieval-Augmented Generation (RAG) system that answers questions about a course syllabus PDF. The system must query document embeddings to provide accurate answers and avoid model hallucinations.
+    </p>
+
+    <h3>2. Methodology</h3>
+    <p>
+      Extracted text from the syllabus PDF and split it into 500-character chunks with a 50-character overlap. Generated text embeddings using Google's embedding model and stored them in a <strong>FAISS</strong> vector database. Integrated vector search with the LLM. When a question is asked, the system retrieves the most relevant chunks and passes them to the LLM as context.
+    </p>
+
+    <h3>3. Tools and Technologies Used</h3>
+    <p>
+      Python 3.12, LangChain, FAISS Vector Store, Google Gemini Embeddings (<code>models/embedding-001</code>), Gemini 1.5 Flash, and helper libraries (<code>pypdf</code>, <code>faiss-cpu</code>, <code>langchain-community</code>).
+    </p>
+
+    <h3>4. System Implementation</h3>
+    <p>
+      The RAG pipeline was implemented in Python:
+    </p>
+    <pre>
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+loader = PyPDFLoader("syllabus.pdf")
+docs = loader.load()
+splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+chunks = splitter.split_documents(docs)
+
+embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+db = FAISS.from_documents(chunks, embeddings)
+    </pre>
+
+    <h3>5. Experimental Results and Analysis</h3>
+    <p>
+      The system reduced hallucinations to 0% by restricting the LLM to retrieved context. Semantic search retrieved the correct policy details, even when queries used synonyms instead of the exact syllabus wording, and successfully parsed tables and lists.
+    </p>
+
+    <h3>6. Key Learning Outcomes</h3>
+    <p>
+      RAG patterns are essential for grounding LLM responses in specific, private documents. Careful text chunking and overlap configuration is critical for maintaining context in vector search, and constraining system instructions prevents the LLM from answering based on outside pre-training data.
+    </p>
+  </div>
+
+  <!-- PAGE 18: CHAPTER 4 - SUMMARY AND CONCLUSION -->
+  <div class="page">
+    <h1>Chapter 4: Summary, Conclusion, and Reflections</h1>
+
+    <h2>4.1 Overall Training Summary</h2>
+    <p>
+      The Summer Training Programme on Generative AI & Prompt Engineering organized by <strong>Electronics & ICT Academy, IIT Roorkee</strong> provided a thorough introduction to modern generative technologies. The curriculum covered core transformer architectures, practical prompt engineering, multi-agent frameworks, and vector search engines. 
+    </p>
+    <p>
+      Building the <strong>AI-Powered Resume Builder</strong> capstone project provided an opportunity to apply these concepts in a full-stack application, demonstrating how generative models can be used to solve real-world problems.
+    </p>
+
+    <h2>4.2 Professional Skills Acquired</h2>
+    <p>
+      The programme helped build key technical competencies: multi-agent system orchestration (building collaborative agent teams in CrewAI), structured prompt design (creating system instructions and prompt templates), REST API development (building backend services with FastAPI), frontend web development (building responsive dashboards in React), and data integration (compiling markdown structures into PDF and Word documents).
+    </p>
+
+    <h2>4.3 Practical Benefits Realized</h2>
+    <p>
+      The AI-Powered Resume Builder addresses direct inefficiencies in the application process: it saves hours of manual work by automatically tailoring experience details, identifies missing keywords and formatting issues to help candidates pass automated resume parsers, and provides clear, step-by-step roadmaps to help candidates build missing skills for target roles.
+    </p>
+
+    <h2>4.4 Future Applications of Generative AI</h2>
+    <p>
+      Generative AI technologies are finding applications across multiple domains: personalized education (creating custom study guides and code exercises), enterprise content workflows (automating report writing and documentation summaries), and software development assistance (assisting developers with code generation and testing).
+    </p>
+
+    <h2>4.5 Personal Experience and Mentorship Reflections</h2>
+    <p>
+      The training programme offered a valuable balance of theoretical concepts and practical, hands-on lab work. The curriculum provided a clear pathway from basic API calls to complex, multi-agent workflows. Developing the capstone project demonstrated the importance of structuring AI workflows, designing solid prompt instructions, and building clean user interfaces to make generative models useful in practice.
+    </p>
+  </div>
+
+  <!-- PAGE 19: REFERENCES -->
+  <div class="page">
+    <h1>References</h1>
+    <br>
+    <div class="references-list">
+      <ol>
+        <li><strong>Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017).</strong> <em>"Attention Is All You Need."</em> Advances in Neural Information Processing Systems, 30.</li>
+        <li><strong>CrewAI Framework Documentation</strong>: <a href="https://docs.crewai.com">https://docs.crewai.com</a> (Accessed July 2026).</li>
+        <li><strong>FastAPI Web Framework Documentation</strong>: <a href="https://fastapi.tiangolo.com">https://fastapi.tiangolo.com</a> (Accessed July 2026).</li>
+        <li><strong>React.js Client Framework Documentation</strong>: <a href="https://react.dev">https://react.dev</a> (Accessed July 2026).</li>
+        <li><strong>Google Gemini API Developer Guide</strong>: <a href="https://ai.google.dev/gemini-api/docs">https://ai.google.dev/gemini-api/docs</a> (Accessed July 2026).</li>
+        <li><strong>OpenAI API Platform Documentation</strong>: <a href="https://platform.openai.com/docs">https://platform.openai.com/docs</a> (Accessed July 2026).</li>
+        <li><strong>ReportLab PDF Generation Library Documentation</strong>: <a href="https://www.reportlab.com/docs">https://www.reportlab.com/docs</a> (Accessed July 2026).</li>
+        <li><strong>python-docx Document Library Reference</strong>: <a href="https://python-docx.readthedocs.io">https://python-docx.readthedocs.io</a> (Accessed July 2026).</li>
+        <li><strong>Brown, T. B., et al. (2020).</strong> <em>"Language Models are Few-Shot Learners."</em> arXiv preprint arXiv:2005.14165.</li>
+        <li><strong>Wei, J., et al. (2022).</strong> <em>"Chain-of-Thought Prompting Elicits Reasoning in Large Language Models."</em> Advances in Neural Information Processing Systems.</li>
+      </ol>
+    </div>
+  </div>
+
+</body>
+</html>

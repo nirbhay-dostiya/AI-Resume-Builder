@@ -1,0 +1,24 @@
+Role: Junior Full Stack Developer
+Company: InnovateTech Systems
+Location: New York, NY (Hybrid)
+
+ABOUT THE ROLE
+We are seeking a talented and motivated Junior Full Stack Developer to join our growing engineering team. In this role, you will work on both the front-end user experience and backend services of our core SaaS product. You will participate in all phases of the software development lifecycle, from concept and design to testing and deployment.
+
+Key Responsibilities:
+- Build responsive, fast-loading user interfaces using React.js, modern CSS, and HTML5.
+- Develop, secure, and maintain RESTful API endpoints using Python (FastAPI/Flask) or Node.js.
+- Write clean, maintainable, and well-tested code following industry best practices.
+- Design database schemas and write optimized queries for PostgreSQL and MongoDB.
+- Integrate cloud storage services (AWS S3) and support deployment using Docker.
+- Collaborate with product managers, UX designers, and senior engineers in an Agile/Scrum setting.
+- Participate in code reviews and write comprehensive unit tests.
+
+Requirements:
+- Bachelor's degree in Computer Science, Software Engineering, or related technical field.
+- Solid understanding of JavaScript (ES6+), HTML5, CSS3, and Python.
+- Hands-on experience building web interfaces with React.js (hooks, state management).
+- Familiarity with backend frameworks like FastAPI, Flask, or Express.
+- Basic knowledge of SQL databases (PostgreSQL) and Git version control.
+- Experience with Docker, AWS, or CI/CD pipelines is a strong plus.
+- Excellent communication and problem-solving skills.
